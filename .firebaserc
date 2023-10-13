@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angular-blog-3b9cd": {
+      "hosting": {
+        "angular-blog": [
+          "angular-blog-3b9cd"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angular-blog-3b9cd"
+  }
+}
