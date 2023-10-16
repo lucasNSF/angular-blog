@@ -11,7 +11,7 @@ import {
   user,
   UserCredential
 } from '@angular/fire/auth';
-import { Observable, Subscription, switchMap } from 'rxjs';
+import { Observable, switchMap, take } from 'rxjs';
 import { UserInstanceError } from 'src/app/errors/UserInstanceError';
 import { EmailType } from 'src/app/models/EmailType';
 
@@ -22,9 +22,9 @@ export class AuthService {
   private auth: Auth = inject(Auth);
   private user$ = user(this.auth);
 
-  async createAuthUser(email: string, password: string): Promise<Subscription> {
+  async createAuthUser(email: string, password: string): Promise<void> {
     await createUserWithEmailAndPassword(this.auth, email, password);
-    return this.sendEmail(EmailType.VERIFICATION).subscribe();
+    this.sendEmail(EmailType.VERIFICATION).pipe(take(1)).subscribe();
   }
 
   async signIn(email: string, password: string): Promise<UserCredential> {
