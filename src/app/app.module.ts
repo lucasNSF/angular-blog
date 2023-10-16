@@ -9,6 +9,11 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthService } from './services/auth/auth.service';
+import { FirestoreService } from './services/firestore/firestore.service';
+import { FollowersService } from './services/followers/followers.service';
+import { FollowingService } from './services/following/following.service';
+import { PostsService } from './services/posts/posts.service';
+import { UserService } from './services/user/user.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +25,14 @@ import { AuthService } from './services/auth/auth.service';
     provideFirestore(() => getFirestore()),
     BrowserAnimationsModule
   ],
-  providers: [AuthService],
+  providers: [
+    UserService,
+    AuthService,
+    FirestoreService,
+    FollowersService,
+    FollowingService,
+    PostsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
