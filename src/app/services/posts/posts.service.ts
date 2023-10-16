@@ -40,6 +40,17 @@ export class PostsService {
     this.firestoreService.updateDocument(docRef, payload);
   }
 
+  async removePost(uid: string, postId: string) {
+    const docRef = await this.firestoreService.getDocumentReference(
+      CollectionsName.POSTS,
+      uid
+    );
+    if (!docRef) return;
+    const userPosts = await this.getPosts(uid);
+    Reflect.deleteProperty(userPosts as Post, postId);
+    this.firestoreService.updateDocument(docRef, userPosts as Post);
+  }
+
   async likePost(uid: string, postId: string) {
     const docRef = await this.firestoreService.getDocumentReference(
       CollectionsName.POSTS,
